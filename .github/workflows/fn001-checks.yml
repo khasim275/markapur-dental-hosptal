@@ -1,0 +1,36 @@
+name: FN-001 checks
+
+on:
+  push:
+    branches:
+      - implementation/fn-001-enquiry
+  pull_request:
+    branches:
+      - main
+      - governance/fn-001-owner-approval
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Type check
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: Production build
+        run: npm run build
+      - name: Dependency security audit
+        run: |
+          npm audit --json > /tmp/npm-audit.json || true
+          node -e 'const report = require("/tmp/npm-audit.json"); console.log(JSON.stringify(report.vulnerabilities ?? {}, null, 2)); if ((report.metadata?.vulnerabilities?.total ?? 0) > 0) process.exit(1);'

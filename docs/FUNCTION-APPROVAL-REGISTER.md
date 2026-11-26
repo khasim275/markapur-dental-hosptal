@@ -61,7 +61,7 @@ The following is a planning backlog, not evidence that these features already ex
 - **Project/brand:** Markapur.
 - **Authoritative repository:** `khasim275/markapur-dental-hosptal`.
 - **Status:** OWNER APPROVED — DESIGN INVESTIGATION ONLY.
-- **Implementation status:** NOT STARTED. No application implementation has been verified in the authoritative repository.
+- **Implementation status:** IN PROGRESS — initial application scaffold and enquiry flow committed to `implementation/fn-001-enquiry`; execution and independent verification remain pending.
 - **Build owner:** Not assigned.
 - **First checker:** Not assigned; must be separate from the builder.
 - **Initial owner approval:** APPROVED on 2026-11-26 in this conversation; scope is design investigation only.
@@ -72,13 +72,14 @@ The following is a planning backlog, not evidence that these features already ex
 - **Final review verdict:** BLOCKED / NOT REVIEWED.
 - **Final owner approval:** PENDING.
 - **Files currently related:** None verified in the authoritative repository.
-- **Tests performed:** None. Status: NOT TESTED.
-- **Evidence:** Repository inspection confirmed it was empty before governance initialization. No API, database, form, test suite, or deployment target has been verified.
+- **Automated CI tests:** 10/10 unit/API tests PASS in GitHub Actions run #21; TypeScript typecheck PASS; Next.js production build PASS; npm audit PASS with zero reported vulnerabilities.
+- **Not yet tested:** Browser-based end-to-end journey, responsive viewport behavior, manual accessibility, independent security review, and five required re-check rounds. These remain NOT TESTED; no independent checker has signed off.
+- **Evidence:** https://github.com/khasim275/markapur-dental-hosptal/actions/runs/45769619832 (commit `e1183980bc73237f456697e91f7a2152636d42d4`). Repository was empty before governance initialization; the application now exists only on the implementation branch.
 - **Required design scope:** Proposed user journey; approved form fields; server/API contract; secure persistence option; server-side validation; spam/abuse controls; duplicate-submission/idempotency strategy; loading, success, and recoverable error states; data minimization and retention; privacy/consent wording; operational ownership and failure handling.
 - **Safety constraints:** Do not connect a live CRM, database, messaging provider, or production service during this design-only stage. Do not use real patient data. Do not promise or imply a confirmed appointment slot; an enquiry is not a booked appointment unless a separately approved scheduling workflow confirms it.
 - **Open owner decisions:** (1) What destination should receive enquiries (approved CRM, clinic-managed database, or another system)? (2) Which fields are essential and permitted? (3) What consent/privacy wording and retention policy should apply? (4) Is the selected date/time only a patient preference, or should the system eventually check real availability? (5) Who at the clinic is responsible for receiving and responding to enquiries?
-- **Current gate:** Initial owner approval received for design investigation only. Build authorization remains NOT GRANTED.
-- **Next action:** Prepare the FN-001 design proposal and website-from-scratch plan for Markapur. Present the design and implementation scope for a separate build authorization before writing application code.
+- **Current gate:** OWNER APPROVED implementation of FN-001 on 2026-11-26, limited to this function and subject to all existing approval gates. Routine implementation decisions within this approved scope do not require repeated micro-approvals. Scope expansion, live patient-data handling, live integrations, merge/release, and deployment remain outside this authorization.
+- **Next action:** Complete FN-001 implementation, run type checks/unit tests/build in CI, collect browser and API evidence using synthetic data, then present the evidence for the required independent functional check and owner review.
 
 ## FN-001 — Initial owner approval request (decision recorded below)
 
@@ -114,11 +115,26 @@ The owner decision is recorded; the design investigation may proceed. Silence is
 |---|---|---|
 | Source of truth selected | COMPLETE | Owner selected the public Markapur repository. |
 | Clinic branding selected | COMPLETE | Owner selected Markapur branding; exact formal clinic/legal name and contact details remain to be supplied if needed. |
-| FN-001 initial owner approval | COMPLETE | Owner approved design investigation only on 2026-11-26; condition recorded: create the website from scratch. |
-| FN-001 design investigation | AUTHORIZED / NOT STARTED | May begin within the approved design-only scope. |
-| FN-001 implementation | NOT AUTHORIZED | Requires separate explicit build authorization after design review. |
+| FN-001 initial owner approval | COMPLETE | Owner approved design investigation on 2026-11-26; condition recorded: create the website from scratch. |
+| FN-001 design investigation | COMPLETE — PROPOSAL RECORDED | Website plan and FN-001 scope documented in `docs/WEBSITE-PLAN.md`. |
+| FN-001 implementation | OWNER APPROVED — IN PROGRESS | Owner explicitly authorized implementation of FN-001 only on 2026-11-26. Routine choices within this function are covered; no deployment authorization. |
 | First functional check | NOT STARTED | Requires implementation and a checker independent of the builder. |
 | Five re-check rounds | 0/5 | Functional, responsive, security, edge-case, and end-to-end evidence required. |
 | Second independent review | BLOCKED | Reviewer not assigned. |
 | Final independent review | BLOCKED | Reviewer not assigned. |
 | Final owner approval/release authorization | PENDING | Separate explicit decision required; deployment remains unauthorized. |
+
+
+## FN-001 implementation authorization (decision recorded)
+
+**Owner decision:** APPROVED — 2026-11-26.
+
+**Owner instruction (verbatim):** "I approve the website plan and explicitly authorize implementation of FN-001 only. Conditions: Build the website from scratch. Keep all approval gates. Do not deploy without my final permission. and don't ask the permission for smal thing i will give overall approval"
+
+**Recorded scope:** Implement FN-001 only, from scratch. Routine implementation decisions that remain within the approved FN-001 scope do not require repeated micro-approvals. Continue to observe all required functional checks, owner review gates, five distinct re-checks, independent reviews, and final release approval. This decision does not authorize other function IDs, real patient-data handling, live CRM/database/messaging/payment integrations, merge to production, or any deployment. Explicit final owner permission is required before production deployment.
+
+**Implementation evidence:** Initial Next.js/TypeScript scaffold, enquiry form, server endpoint, validation contract, development-only storage boundary, unit/API tests, CI workflow, and implementation notes have been committed to branch `implementation/fn-001-enquiry`. GitHub Actions run #24 passed typecheck, all 10 automated tests, production build, and npm audit (zero reported vulnerabilities). Browser/e2e, responsive, manual accessibility, independent review, and five re-check rounds remain NOT TESTED.
+
+## Deployment safeguard incident — 2026-11-26
+
+The pre-existing Git-linked Vercel project automatically queued preview build attempts for commits to the implementation branch. This was unintended and was not an intentional deployment request. There were 23 attempts: 16 were canceled while still cancelable and 7 had already entered ERROR. None reached READY, none had a production target, and the Vercel project reported `live: false`. No production deployment occurred. The Vercel project setting `previewDeploymentsDisabled` was set to `true` to prevent further automatic previews before final owner release authorization. Hosted preview screenshots and browser-based checks are therefore unavailable and remain NOT TESTED.
