@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { POST } from "../app/api/appointment-enquiries/route";
 
 function request(body: unknown, key = crypto.randomUUID(), ip = crypto.randomUUID()) {
@@ -57,14 +57,13 @@ describe("appointment enquiry endpoint", () => {
   });
 
   it("does not accept production submissions without approved storage", async () => {
-    const original = process.env.NODE_ENV;
-    process.env.NODE_ENV = "production";
+    vi.stubEnv("NODE_ENV", "production");
     try {
       const response = await POST(request(validEnquiry));
       expect(response.status).toBe(503);
       expect((await response.json()).code).toBe("STORAGE_NOT_CONFIGURED");
     } finally {
-      process.env.NODE_ENV = original;
+      vi.unstubAllEnvs();
     }
   });
 });
