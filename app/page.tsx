@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 type FieldErrors = Partial<Record<"name" | "phone" | "consent", string[]>>;
 
@@ -8,8 +8,12 @@ export default function HomePage() {
   const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [notice, setNotice] = useState<{ kind: "success" | "error"; text: string } | null>(null);
-  const today = new Date();
-  const minDate = new Date(today.getTime() - today.getTimezoneOffset() * 60_000).toISOString().slice(0, 10);
+  const [minDate, setMinDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date();
+    setMinDate(new Date(today.getTime() - today.getTimezoneOffset() * 60_000).toISOString().slice(0, 10));
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -112,7 +116,7 @@ export default function HomePage() {
             <div className="field-row">
               <div className="field">
                 <label htmlFor="preferredDate">Preferred date</label>
-                <input id="preferredDate" name="preferredDate" type="date" min={minDate} />
+                <input id="preferredDate" name="preferredDate" type="date" min={minDate || undefined} />
               </div>
               <div className="field">
                 <label htmlFor="preferredTime">Preferred time</label>
