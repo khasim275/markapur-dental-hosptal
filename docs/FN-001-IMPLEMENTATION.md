@@ -22,7 +22,7 @@ Before production use, a separately approved persistent storage destination, acc
 
 ## Test status
 
-The test suite has been authored but has not been executed in this environment. Test status remains **NOT TESTED** until CI or a local run produces evidence. No browser screenshots or end-to-end test evidence are currently available.
+GitHub Actions run **#21** completed successfully on commit `e1183980bc73237f456697e91f7a2152636d42d4`: TypeScript typecheck PASS; 10 automated unit/API tests PASS; Next.js production build PASS; npm audit PASS with zero reported vulnerabilities. Evidence: https://github.com/khasim275/markapur-dental-hosptal/actions/runs/45769619832. This is automated CI evidence, not an independent review or a browser-based end-to-end/responsive test. No browser screenshots or independent reviewer evidence are currently available. The earlier run found a TypeScript issue and a subsequent run found alias-resolution errors; both were fixed before the passing run. The dependency audit initially found six advisories; affected packages were upgraded, and the passing audit returned an empty vulnerability report.
 
 ## Known limitations
 
