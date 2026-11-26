@@ -10,7 +10,7 @@ export const enquirySchema = z.object({
     .regex(/^(?:\+91[ -]?)?[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number"),
   preferredDate: optionalDate,
   preferredTime: z.enum(["", "morning", "afternoon", "evening"]).optional().default(""),
-  consent: z.literal(true, { errorMap: () => ({ message: "Please agree before sending your enquiry" }) })
+  consent: z.literal(true, { error: "Please agree before sending your enquiry" })
 });
 
 export type AppointmentEnquiryInput = z.infer<typeof enquirySchema>;
