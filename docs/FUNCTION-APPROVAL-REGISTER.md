@@ -3,7 +3,7 @@
 **Project:** Markapur dental website  
 **Source of truth:** `khasim275/markapur-dental-hosptal` (public GitHub repository)  
 **Clinic branding:** Markapur  
-**Register updated:** 2026-11-26  
+**Register updated:** 2026-11-26 (owner decision recorded)  
 **Release policy:** No production deployment, live patient-data collection, patient communications, or payment activation without explicit written owner approval.
 
 ## Source-of-truth status
@@ -30,7 +30,7 @@ The following is a planning backlog, not evidence that these features already ex
 
 | Priority | Function ID | Function | Status | Initial note |
 |---|---|---|---|---|
-| P0 | FN-001 | Appointment enquiry submission (server-backed) | PENDING OWNER APPROVAL | First function proposed for design investigation; no implementation verified. |
+| P0 | FN-001 | Appointment enquiry submission (server-backed) | OWNER APPROVED — DESIGN ONLY | Owner approved design investigation on 2026-11-26; requested the website be created from scratch. No implementation authorized yet. |
 | P0 | FN-002 | Appointment form validation and error recovery | NOT ASSESSED | Scope and source implementation not yet inspected. |
 | P0 | FN-003 | Verified clinic identity and contact actions | BLOCKED | Owner must supply verified clinic contact details and destinations. |
 | P0 | FN-004 | Privacy notice and patient-data handling | BLOCKED | Clinic policy and applicable legal/privacy review required before collecting patient data. |
@@ -60,11 +60,11 @@ The following is a planning backlog, not evidence that these features already ex
 - **Function:** Provide a secure way for a prospective patient to submit an appointment enquiry and show a success confirmation only after the server confirms that the enquiry has been safely persisted.
 - **Project/brand:** Markapur.
 - **Authoritative repository:** `khasim275/markapur-dental-hosptal`.
-- **Status:** PENDING OWNER APPROVAL — design investigation only.
+- **Status:** OWNER APPROVED — DESIGN INVESTIGATION ONLY.
 - **Implementation status:** NOT STARTED. No application implementation has been verified in the authoritative repository.
 - **Build owner:** Not assigned.
 - **First checker:** Not assigned; must be separate from the builder.
-- **Initial owner approval:** PENDING.
+- **Initial owner approval:** APPROVED on 2026-11-26 in this conversation; scope is design investigation only.
 - **Re-check rounds:** 0/5.
 - **Second reviewer:** Not assigned; independent review not performed.
 - **Second review verdict:** BLOCKED / NOT REVIEWED.
@@ -77,10 +77,10 @@ The following is a planning backlog, not evidence that these features already ex
 - **Required design scope:** Proposed user journey; approved form fields; server/API contract; secure persistence option; server-side validation; spam/abuse controls; duplicate-submission/idempotency strategy; loading, success, and recoverable error states; data minimization and retention; privacy/consent wording; operational ownership and failure handling.
 - **Safety constraints:** Do not connect a live CRM, database, messaging provider, or production service during this design-only stage. Do not use real patient data. Do not promise or imply a confirmed appointment slot; an enquiry is not a booked appointment unless a separately approved scheduling workflow confirms it.
 - **Open owner decisions:** (1) What destination should receive enquiries (approved CRM, clinic-managed database, or another system)? (2) Which fields are essential and permitted? (3) What consent/privacy wording and retention policy should apply? (4) Is the selected date/time only a patient preference, or should the system eventually check real availability? (5) Who at the clinic is responsible for receiving and responding to enquiries?
-- **Current gate:** Awaiting the owner's initial approval of the limited design-investigation scope below.
-- **Next action:** Do not begin implementation until the owner responds to this request. After approval, prepare a design proposal only; return for a separate build authorization before implementation.
+- **Current gate:** Initial owner approval received for design investigation only. Build authorization remains NOT GRANTED.
+- **Next action:** Prepare the FN-001 design proposal and website-from-scratch plan for Markapur. Present the design and implementation scope for a separate build authorization before writing application code.
 
-## FN-001 — Initial owner approval request
+## FN-001 — Initial owner approval request (decision recorded below)
 
 **Decision requested:** Approve the team to investigate and document a proposed FN-001 design for Markapur appointment enquiries.
 
@@ -98,17 +98,15 @@ If approved, the permitted work is limited to:
 - Confirming appointment slots or creating bookings.
 - Merging to a production/release branch or deploying/publishing any website.
 
-**Owner response required:**
+**Owner decision recorded:** APPROVE — 2026-11-26.
 
-- [ ] **APPROVE** — FN-001 design investigation only, within the limits above.
-- [ ] **REJECT** — Do not proceed with FN-001.
-- [ ] **REQUEST CHANGES** — Provide the changes required before reconsideration.
+**Owner's condition/comment (verbatim):** "i need to create the website from screach".
 
-**Owner name/role:** ____________________  
-**Decision date:** ____________________  
-**Notes/conditions:** ____________________
+**Interpretation recorded:** The owner wants the Markapur website created from scratch. This is a project-level requirement for the proposed design and subsequent build plan. It does not expand the scope of the approval just granted: the current authorization is limited to FN-001 design investigation. A separate explicit build authorization is required before implementation begins.
 
-Until an explicit owner decision is recorded, FN-001 remains **PENDING OWNER APPROVAL** and work is paused. No response or silence will be treated as approval.
+**Approval boundary:** This decision is not production/release approval and is not deployment authorization. No live service integrations, real patient-data processing, patient communications, or payments are authorized.
+
+The owner decision is recorded; the design investigation may proceed. Silence is not approval for any later gate.
 
 ## Initial gate summary
 
@@ -116,9 +114,9 @@ Until an explicit owner decision is recorded, FN-001 remains **PENDING OWNER APP
 |---|---|---|
 | Source of truth selected | COMPLETE | Owner selected the public Markapur repository. |
 | Clinic branding selected | COMPLETE | Owner selected Markapur branding; exact formal clinic/legal name and contact details remain to be supplied if needed. |
-| FN-001 initial owner approval | PENDING | Owner must approve, reject, or request changes above. |
-| FN-001 design investigation | NOT STARTED | Begins only after explicit approval. |
-| FN-001 implementation | NOT AUTHORIZED | Requires a separate build decision after design review. |
+| FN-001 initial owner approval | COMPLETE | Owner approved design investigation only on 2026-11-26; condition recorded: create the website from scratch. |
+| FN-001 design investigation | AUTHORIZED / NOT STARTED | May begin within the approved design-only scope. |
+| FN-001 implementation | NOT AUTHORIZED | Requires separate explicit build authorization after design review. |
 | First functional check | NOT STARTED | Requires implementation and a checker independent of the builder. |
 | Five re-check rounds | 0/5 | Functional, responsive, security, edge-case, and end-to-end evidence required. |
 | Second independent review | BLOCKED | Reviewer not assigned. |
