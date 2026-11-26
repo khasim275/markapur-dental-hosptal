@@ -8,6 +8,8 @@ export default function HomePage() {
   const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [notice, setNotice] = useState<{ kind: "success" | "error"; text: string } | null>(null);
+  const today = new Date();
+  const minDate = new Date(today.getTime() - today.getTimezoneOffset() * 60_000).toISOString().slice(0, 10);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -15,8 +17,9 @@ export default function HomePage() {
     setPending(true);
     setErrors({});
     setNotice(null);
+    const formElement = event.currentTarget;
 
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formElement);
     const payload = {
       name: String(form.get("name") ?? ""),
       phone: String(form.get("phone") ?? ""),
@@ -44,7 +47,7 @@ export default function HomePage() {
         kind: "success",
         text: `Your enquiry was received in this development environment. Reference: ${result.reference}. This is not a confirmed appointment.`
       });
-      event.currentTarget.reset();
+      formElement.reset();
     } catch (error) {
       setNotice({
         kind: "error",
@@ -109,7 +112,7 @@ export default function HomePage() {
             <div className="field-row">
               <div className="field">
                 <label htmlFor="preferredDate">Preferred date</label>
-                <input id="preferredDate" name="preferredDate" type="date" min={new Date().toISOString().slice(0, 10)} />
+                <input id="preferredDate" name="preferredDate" type="date" min={minDate} />
               </div>
               <div className="field">
                 <label htmlFor="preferredTime">Preferred time</label>
